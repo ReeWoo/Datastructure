@@ -35,6 +35,28 @@ void measure_performance(MyDeque<T>& deque1, std::deque<T>& deque2)
 			deque2.push_front(dis(gen));
 	}
 	mt2.end();
+
+
+	mt.start();
+	while (!deque1.empty())
+	{
+		if (dis2(gen) == 0)
+			deque1.pop_back();
+		else
+			deque1.pop_front();
+	}
+	mt.end();
+
+
+	mt2.start();
+	while (!deque1.empty())
+	{
+		if (dis2(gen) == 0)
+			deque2.pop_back();
+		else
+			deque2.pop_front();
+	}
+	mt2.end();
 }
 
 template <typename T>
