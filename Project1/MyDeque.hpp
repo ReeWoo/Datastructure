@@ -28,8 +28,7 @@ public:
 				delete[] m_data[i];
 				m_data[i] = nullptr;
 			}
-			else
-				std::cout << "null" << std::endl;
+			
 		}
 		if (m_data != nullptr)
 			delete[] m_data;
@@ -45,6 +44,11 @@ public:
 		{
 			pop_back();
 		}
+		m_data_start = -1;
+		m_data_end = -1;
+		m_start = VACCANCY_TERM;
+		m_end = VACCANCY_TERM;
+
 	}
 	bool empty()
 	{
@@ -124,6 +128,7 @@ public:
 				}
 				delete[] m_data;
 				m_data = temp_chunk;
+				temp_chunk = nullptr;
 				m_end = CHUNK_BLOCK_SIZE + VACCANCY_TERM;
 				CHUNK_BLOCK_SIZE *= 2;
 			}
@@ -174,6 +179,7 @@ public:
 				}
 				delete[] m_data;
 				m_data = temp_chunk;
+				temp_chunk = nullptr;
 				CHUNK_BLOCK_SIZE *= 2;
 				m_start = VACCANCY_TERM - 1;
 			}
@@ -195,8 +201,9 @@ public:
 		++m_size;
 		m_head = m_data[m_start];
 	}
-private:
 	int m_size, m_start, m_end, m_data_start, m_data_end;
+private:
+	
 	T* m_head, *m_tail;
 	T** m_data;
 

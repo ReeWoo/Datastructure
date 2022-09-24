@@ -4,7 +4,7 @@
 #include "MyDeque.hpp"
 #include <deque>
 #include <random>
-
+constexpr int TEST_CASE = 600;
 template <typename T>
 class CompareDeque
 {
@@ -17,7 +17,7 @@ public:
 		std::uniform_int_distribution<T> dis(0, 99);
 		std::uniform_int_distribution<int> dis2(0, 1);
 
-		int test_size = 1000;
+		int test_size = TEST_CASE;
 		MeasureTime mt("custom deque performance");
 		MeasureTime mt2("std deque performance");
 
@@ -72,7 +72,7 @@ public:
 		std::uniform_int_distribution<T> dis(0, 99);
 		std::uniform_int_distribution<int> dis2(0, 1);
 
-		int test_size = 10000;
+		int test_size = TEST_CASE;
 		T value;
 		for (int i = 0; i < test_size; ++i)
 		{
@@ -100,7 +100,7 @@ public:
 
 		std::random_device rd;
 		std::mt19937 gen(rd());
-		std::uniform_int_distribution<T> dis(0, 99);
+		std::uniform_int_distribution<T> dis(0, 1);
 
 		while (!deque1.empty() && !deque2.empty())
 		{
