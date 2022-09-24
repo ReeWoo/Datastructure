@@ -4,13 +4,16 @@
 #include "MyDeque.hpp"
 #include <deque>
 #include <random>
-constexpr int TEST_CASE = 600;
+#include <iomanip>
+constexpr int TEST_CASE = 1000000;
 template <typename T>
 class CompareDeque
 {
 public:
 	void measure_performance(MyDeque<T>& deque1, std::deque<T>& deque2)
 	{
+		deque1.clear();
+		deque2.clear();
 
 		std::random_device rd;
 		std::mt19937 gen(rd());
@@ -21,6 +24,9 @@ public:
 		MeasureTime mt("custom deque performance");
 		MeasureTime mt2("std deque performance");
 
+		long long custom_total = 0;
+		long long std_total = 0;
+
 		mt.start();
 		for (int i = 0; i < test_size; ++i)
 		{
@@ -29,7 +35,7 @@ public:
 			else
 				deque1.push_front(dis(gen));
 		}
-		mt.end();
+		custom_total += mt.end();
 
 		mt2.start();
 		for (int i = 0; i < test_size; ++i)
@@ -39,7 +45,7 @@ public:
 			else
 				deque2.push_front(dis(gen));
 		}
-		mt2.end();
+		std_total += mt2.end();
 
 
 		mt.start();
@@ -50,18 +56,22 @@ public:
 			else
 				deque1.pop_front();
 		}
-		mt.end();
+		custom_total += mt.end();
 
 
 		mt2.start();
-		while (!deque1.empty())
+		while (!deque2.empty())
 		{
 			if (dis2(gen) == 0)
 				deque2.pop_back();
 			else
 				deque2.pop_front();
 		}
-		mt2.end();
+		std_total += mt2.end();
+
+		std::cout << "==============================================" << std::endl;
+		std::cout << "custom total time : " << std::setw(10) << custom_total << " micro sec" << std::endl;
+		std::cout << "   std total time : " << std::setw(10) << std_total << " micro sec" << std::endl;
 	}
 
 
@@ -77,6 +87,7 @@ public:
 		for (int i = 0; i < test_size; ++i)
 		{
 			value = dis(gen);
+			
 			if (dis2(gen) == 0)
 			{
 				deque1.push_back(value);
