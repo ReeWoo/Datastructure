@@ -11,6 +11,20 @@ template <typename T>
 class CompareHeap
 {
 public:
+	void main()
+	{
+		std::cout << "\n=============================================" << std::endl;
+		std::cout << "========== custom heap VS std heap ==========" << std::endl;
+		std::cout << "=============================================\n" << std::endl;
+
+		std::priority_queue<int> pq;
+		Heap<int> h;
+		std::cout << "datatype std size : " << sizeof(pq) << " custom size : " << sizeof(h) << std::endl;
+	
+		compare(h, pq) == 1 ? std::cout << "\n *** 일치 여부 테스트 통과 *** \n" << std::endl : std::cout << "\n *** 일치 여부 테스트 실패 *** \n" << std::endl;
+		measure_performance(h, pq);
+	}
+
 	void measure_performance(Heap<T>& my_heap, std::priority_queue<T>& std_heap)
 	{
 		my_heap.clear();

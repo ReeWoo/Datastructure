@@ -10,6 +10,20 @@ template <typename T>
 class CompareDeque
 {
 public:
+	void main()
+	{
+		std::cout << "\n=============================================" << std::endl;
+		std::cout << "========== custom deque VS std deque ==========" << std::endl;
+		std::cout << "=============================================\n" << std::endl;
+
+		MyDeque<int> mdq;
+		std::deque<int> dq;
+		std::cout << "datatype std size : " << sizeof(dq) << " custom size : " << sizeof(mdq) << std::endl;
+
+		compare(mdq, dq) == 1 ? std::cout << "\n *** 일치 여부 테스트 통과 *** \n" << std::endl : std::cout << "\n *** 일치 여부 테스트 실패 *** \n" << std::endl;
+		measure_performance(mdq, dq);
+	}
+
 	void measure_performance(MyDeque<T>& deque1, std::deque<T>& deque2)
 	{
 		deque1.clear();
