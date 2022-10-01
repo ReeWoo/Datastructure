@@ -6,7 +6,8 @@
 #include <queue>
 #include "heap_test.h"
 #include "practical_example_5.3.4.h"
-
+//#include "MyQuickSort.h"
+#include "quick_sort_test.h"
 
 int main()
 {
@@ -17,6 +18,8 @@ int main()
 	cd.main();
 	ch.main();
 
+	CompareSort<int> cs;
+	cs.main();
 	
 	return 0;
 }

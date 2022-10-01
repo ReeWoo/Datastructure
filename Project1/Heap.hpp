@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 
-constexpr unsigned int MAX_SIZE = 100000;
 template <typename T>
 class Heap
 {
@@ -40,32 +39,22 @@ public:
 			return;
 
 		T temp;
+		int max;
 		if (m_data[left] > m_data[right])
+			max = left;
+		else max = right;
+
+		if (m_data[max] > m_data[current_idx])
 		{
-			if (m_data[left] > m_data[current_idx])
-			{
-				temp = m_data[left];
-				m_data[left] = m_data[current_idx];
-				m_data[current_idx] = temp;
-				current_idx = left;
-				left = current_idx * 2 + 1;
-				right = left + 1;
-				top_down_heapify(current_idx, left, right);
-			}
+			temp = m_data[max];
+			m_data[max] = m_data[current_idx];
+			m_data[current_idx] = temp;
+			current_idx = max;
+			left = current_idx * 2 + 1;
+			right = left + 1;
+			top_down_heapify(current_idx, left, right);
 		}
-		else
-		{
-			if (m_data[right] > m_data[current_idx])
-			{
-				temp = m_data[right];
-				m_data[right] = m_data[current_idx];
-				m_data[current_idx] = temp;
-				current_idx = right;
-				left = current_idx * 2 + 1;
-				right = left + 1;
-				top_down_heapify(current_idx, left, right);
-			}
-		}
+
 	}
 	void bottom_up_heapify()
 	{
@@ -81,7 +70,7 @@ public:
 				m_data[current_idx] = temp;
 			}
 			else
-			current_idx = parent_idx;
+				current_idx = parent_idx;
 			parent_idx = current_idx % 2 == 0 ? current_idx / 2 - 1 : current_idx / 2;
 		}
 
