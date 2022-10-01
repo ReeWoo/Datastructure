@@ -94,7 +94,7 @@ public:
 			val2 = std_vec[i];
 			if (val1 != val2)
 			{
-				std::cout << "bad " << my_vec[i - 1] << " " << val1 << " " << std_vec[i - 1] << " " << val2 << std::endl;
+				std::cout << "bad " << val1 << " " << val2 << std::endl;
 				return false;
 			}
 		}
